@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {auth, signOut, signIn} from '@/auth'
+import { redirect } from 'next/dist/server/api-utils'
 
 const Navbar = async () => {
     const session = await auth();
@@ -22,7 +23,7 @@ const Navbar = async () => {
 
                         <form action={ async () => {
                             "use server";
-                            await signOut()
+                            await signOut({redirectTo: "/"})
                         }}>
                             <button type='submit'>
                                 Logout
